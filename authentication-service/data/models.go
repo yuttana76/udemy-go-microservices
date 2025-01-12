@@ -89,6 +89,8 @@ func (u *User) GetByEmail(email string) (*User, error) {
 
 	query := `select id, email, first_name, last_name, password, user_active, created_at, updated_at from users where email = $1`
 
+	// log.Printf("%s\n", email)
+
 	var user User
 	row := db.QueryRowContext(ctx, query, email)
 
@@ -104,6 +106,7 @@ func (u *User) GetByEmail(email string) (*User, error) {
 	)
 
 	if err != nil {
+		log.Panic(err)
 		return nil, err
 	}
 
