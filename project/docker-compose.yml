@@ -13,6 +13,15 @@ services:
       mode: replicated
       replicas: 1
 
+  bankApp-service:
+    build:
+      context: ./../bankApp
+      dockerfile: ./../bankApp/bankApp.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+
   logger-service:
     build:
       context: ./../logger-service
@@ -76,6 +85,19 @@ services:
       POSTGRES_DB: users
     volumes:
       - ./db-data/postgres/:/var/lib/postgresql/data/
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password102
+      MYSQL_DATABASE: my-database
+      MYSQL_USER: emminex
+      MYSQL_PASSWORD: password104
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db-data/mysql/:/var/lib/mysql
+
 
   mongo:
     image: 'mongo:4.2.16-bionic'
