@@ -22,3 +22,14 @@ Install gorilla/mux
 https://github.com/gorilla/mux
 
 >go get -u github.com/gorilla/mux
+
+# viper lib
+configuration solution for Go 
+
+https://pkg.go.dev/github.com/spf13/viper
+
+EP.2
+Go Log
+>go get -u go.uber.org/zap
+
+
