@@ -2,10 +2,10 @@ package main
 
 import (
 	"bank/handler"
+	"bank/logs"
 	"bank/repository"
 	"bank/service"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -37,7 +37,9 @@ func main() {
 	router.HandleFunc("/customers", customerHandler.GetCustomers).Methods(http.MethodGet)
 	router.HandleFunc("/customers/{customerID:[0-9]+}", customerHandler.GetCustomer).Methods(http.MethodGet)
 
-	log.Printf("Starting banking service  at %v", viper.GetInt("app.port"))
+	// log.Printf("Starting banking service  at %v", viper.GetInt("app.port"))
+	logs.Info("Starting banking service" + viper.GetString("app.port"))
+
 	// http.ListenAndServe(":8000", router)
 	http.ListenAndServe(fmt.Sprintf(":%v", viper.GetInt("app.port")), router)
 
@@ -66,7 +68,6 @@ func initTimeZone() {
 	time.Local = ict
 }
 
-// db, err := sqlx.Open("mysql", "root:password102@tcp(localhost:3306)/my-database?parseTime=true")
 func initDatabase() *sqlx.DB {
 	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=true",
 		viper.GetString("db.username"),
@@ -74,8 +75,10 @@ func initDatabase() *sqlx.DB {
 		viper.GetString("db.host"),
 		viper.GetInt("db.port"),
 		viper.GetString("db.database"))
-
 	db, err := sqlx.Open(viper.GetString("db.driver"), dsn)
+
+	// db, err := sqlx.Open("mysql", "root:password102@tcp(localhost:3306)/my-database?parseTime=true")
+
 	if err != nil {
 		panic(err)
 	}
