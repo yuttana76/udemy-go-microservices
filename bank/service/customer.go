@@ -2,7 +2,7 @@ package service
 
 // DTO (Data Transfer Object)
 type CustomerResponse struct {
-	CustomerID string `json:"customer_id" xml:"customer_id"`
+	CustomerID string `json:"customer_id"`
 	Name       string `json:"name"`
 	Status     int    `json:"status"`
 }

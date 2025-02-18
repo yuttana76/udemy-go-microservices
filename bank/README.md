@@ -29,7 +29,9 @@ configuration solution for Go
 https://pkg.go.dev/github.com/spf13/viper
 
 EP.2
+https://www.youtube.com/watch?v=tWlWoRlDPJE
+
 Go Log
 >go get -u go.uber.org/zap
 
-
+Time : 40:36

@@ -18,3 +18,6 @@ func NewNotFoundError(message string) error {
 func NewInternalServerError() error {
 	return AppError{Code: http.StatusInternalServerError, Message: "internal server error"}
 }
+func NewValidationError(message string) error {
+	return AppError{Code: http.StatusUnprocessableEntity, Message: message}
+}
